@@ -21,7 +21,7 @@ const DATA = [
       {
         id: '2',
         name: 'Cheetos',
-        description: 'Salgadinho',
+        description: 'Elma Chips',
         date: '12.08',
         hour: '12:00',
         status: 'negative',
