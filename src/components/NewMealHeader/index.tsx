@@ -4,25 +4,19 @@ import {
   Container,
   ContentContainer,
   Icon,
-  SubTitleHeader,
   TitleHeader,
 } from './styles';
 
-export type Props = {
-  status: 'positive' | 'negative';
-};
-
-export function StatsHeader({ status }: Props) {
+export function NewMealHeader() {
   const navigation = useNavigation();
 
   return (
-    <Container status={status}>
+    <Container>
       <ContentContainer>
         <ButtonIcon onPress={() => navigation.goBack()}>
-          <Icon status={status} />
+          <Icon />
         </ButtonIcon>
-        <TitleHeader>90,86%</TitleHeader>
-        <SubTitleHeader>das refeições dentro da dieta</SubTitleHeader>
+        <TitleHeader>Nova refeição</TitleHeader>
       </ContentContainer>
     </Container>
   );

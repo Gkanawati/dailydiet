@@ -104,7 +104,7 @@ export function Home() {
       />
 
       <TextAlt>Refeições</TextAlt>
-      <Button />
+      <Button title='+ Nova refeição' onPress={() => navigate('new')} />
 
       <SectionList
         sections={DATA}

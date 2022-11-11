@@ -1,9 +1,11 @@
 import { ArrowLeft } from 'phosphor-react-native';
 import { TouchableOpacity } from 'react-native';
 import styled, { css } from 'styled-components/native';
+import { Props } from '.';
 
-export const Container = styled.SafeAreaView`
-  background-color: ${({ theme }) => theme.COLORS.GREEN_LIGHT};
+export const Container = styled.SafeAreaView<Props>`
+  background-color: ${({ theme, status }) =>
+    status === 'positive' ? theme.COLORS.GREEN_LIGHT : theme.COLORS.RED_LIGHT};
 `;
 
 export const ContentContainer = styled.View`
@@ -16,12 +18,14 @@ export const ButtonIcon = styled(TouchableOpacity)`
   align-self: flex-start;
 `;
 
-export const Icon = styled(ArrowLeft).attrs(({ theme }) => ({
+export const Icon = styled(ArrowLeft).attrs<Props>(({ theme, status }) => ({
   size: 28,
-  color: theme.COLORS.GREEN_DARK,
-}))``;
+  color:
+    status === 'positive' ? theme.COLORS.GREEN_DARK : theme.COLORS.RED_DARK,
+}))<Props>``;
 
 export const TitleHeader = styled.Text`
+  margin-top: -24px;
   ${({ theme }) => css`
     color: ${theme.COLORS.GRAY_700};
     font-size: ${theme.FONT_SIZE.XXL}px;

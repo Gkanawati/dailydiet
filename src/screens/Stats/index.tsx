@@ -6,7 +6,7 @@ import { Container, ContentContainer, StatsTitle } from './styles';
 export function Stats() {
   return (
     <Container>
-      <StatsHeader />
+      <StatsHeader status='negative' />
       <ContentContainer>
         <StatsTitle>Estatísticas gerais</StatsTitle>
 

@@ -14,7 +14,7 @@ export const ArrowIcon = styled(ArrowUpRight).attrs<Props>(
     color:
       status === 'positive' ? theme.COLORS.GREEN_DARK : theme.COLORS.RED_DARK,
   })
-)`
+)<Props>`
   align-self: flex-end;
   margin-bottom: -24px;
 `;

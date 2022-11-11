@@ -1,6 +1,9 @@
+import { TouchableOpacity } from 'react-native';
 import styled, { css } from 'styled-components/native';
 
-export const Container = styled.View`
+export const Container = styled(TouchableOpacity).attrs(() => ({
+  activeOpacity: 0.8,
+}))`
   background-color: ${({ theme }) => theme.COLORS.GRAY_600};
   border-radius: 6px;
   justify-content: center;
