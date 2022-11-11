@@ -3,7 +3,7 @@ import { TextInput, TouchableOpacity } from 'react-native';
 import styled, { css } from 'styled-components/native';
 
 type StatusButtonProps = {
-  status?: FoodStatusProps | '';
+  status?: FoodStatusProps | string;
 };
 
 type IconStatusButtonProps = {
@@ -55,7 +55,7 @@ export const RowButtons = styled.View`
   justify-content: center;
 `;
 
-export const StatusButton = styled(TouchableOpacity)<StatusButtonProps>`
+export const StatusButtonPositive = styled(TouchableOpacity)<StatusButtonProps>`
   flex: 5;
   flex-direction: row;
   max-height: 50px;
@@ -65,15 +65,28 @@ export const StatusButton = styled(TouchableOpacity)<StatusButtonProps>`
   border-radius: 6px;
   padding: 16px;
   ${({ theme, status }) => css`
-    background-color: ${!status
-      ? theme.COLORS.GRAY_200
-      : status === 'positive'
+    background-color: ${status === 'positive'
       ? theme.COLORS.GREEN_LIGHT
-      : theme.COLORS.RED_LIGHT};
-    border: ${status ? 1 : 0}px;
-    border-color: ${status === 'positive'
-      ? theme.COLORS.GREEN_DARK
-      : theme.COLORS.RED_DARK};
+      : theme.COLORS.GRAY_200};
+    border: ${status === 'positive' ? 1 : 0}px;
+    border-color: ${status === 'positive' && theme.COLORS.GREEN_DARK};
+  `}
+`;
+export const StatusButtonNegative = styled(TouchableOpacity)<StatusButtonProps>`
+  flex: 5;
+  flex-direction: row;
+  max-height: 50px;
+  min-height: 50px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  padding: 16px;
+  ${({ theme, status }) => css`
+    background-color: ${status === 'negative'
+      ? theme.COLORS.RED_LIGHT
+      : theme.COLORS.GRAY_200};
+    border: ${status === 'negative' ? 1 : 0}px;
+    border-color: ${status === 'negative' && theme.COLORS.RED_DARK};
   `}
 `;
 

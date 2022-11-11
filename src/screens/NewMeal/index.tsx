@@ -1,7 +1,7 @@
+import { useState } from 'react';
+import { View } from 'react-native';
 import { Button } from '@components/Button';
 import { NewMealHeader } from '@components/NewMealHeader';
-import { TouchableOpacity, View } from 'react-native';
-import theme from '../../theme';
 import {
   Container,
   ContainerInput,
@@ -10,11 +10,14 @@ import {
   Input,
   Label,
   RowButtons,
-  StatusButton,
+  StatusButtonNegative,
+  StatusButtonPositive,
   TextButton,
 } from './styles';
 
 export function NewMeal() {
+  const [status, setStatus] = useState('');
+
   return (
     <Container>
       <NewMealHeader />
@@ -26,7 +29,7 @@ export function NewMeal() {
         </ContainerInput>
         <ContainerInput>
           <Label>Descrição</Label>
-          <Input style={{ minHeight: 120 }} />
+          <Input style={{ minHeight: 120 }} multiline />
         </ContainerInput>
 
         <View
@@ -48,15 +51,21 @@ export function NewMeal() {
 
         <Label>Está dentro da dieta?</Label>
         <RowButtons>
-          <StatusButton status=''>
+          <StatusButtonPositive
+            status={status}
+            onPress={() => setStatus('positive')}
+          >
             <IconButton color='positive' />
             <TextButton>Sim</TextButton>
-          </StatusButton>
+          </StatusButtonPositive>
           <View style={{ flex: 1 }} />
-          <StatusButton status=''>
+          <StatusButtonNegative
+            status={status}
+            onPress={() => setStatus('negative')}
+          >
             <IconButton color='negative' />
             <TextButton>Não</TextButton>
-          </StatusButton>
+          </StatusButtonNegative>
         </RowButtons>
         <Button title='Cadastrar refeição' />
       </ContentContainer>
