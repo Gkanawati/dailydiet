@@ -1,9 +1,16 @@
-import { View, Text } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { View } from 'react-native';
+import { useTheme } from 'styled-components/native';
+import { AppRoutes } from './app.routes';
 
-export default function Routes() {
+export function Routes() {
+  const { COLORS } = useTheme();
+
   return (
-    <View>
-      <Text>Routes</Text>
+    <View style={{ flex: 1, backgroundColor: COLORS.GRAY_600 }}>
+      <NavigationContainer>
+        <AppRoutes />
+      </NavigationContainer>
     </View>
   );
 }

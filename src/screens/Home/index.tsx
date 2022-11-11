@@ -5,6 +5,7 @@ import { StatsCard } from '@components/StatsCard';
 import { SectionList, Text, View } from 'react-native';
 
 import { Container, TextAlt, TitleSection } from './styles';
+import { useNavigation } from '@react-navigation/native';
 
 const DATA = [
   {
@@ -90,11 +91,17 @@ const DATA = [
 ];
 
 export function Home() {
+  const { navigate } = useNavigation();
+
   return (
     <Container>
       <Header />
 
-      <StatsCard statsNumber={90.86} status='positive' />
+      <StatsCard
+        statsNumber={90.86}
+        status='positive'
+        onPress={() => navigate('stats')}
+      />
 
       <TextAlt>Refeições</TextAlt>
       <Button />

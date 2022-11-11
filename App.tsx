@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 import theme from './src/theme';
 import { ThemeProvider } from 'styled-components/native';
 import {
@@ -8,7 +8,7 @@ import {
   Nunito_700Bold,
 } from '@expo-google-fonts/nunito';
 import { Loading } from '@components/Loading';
-import { Home } from '@screens/Home';
+import { Routes } from './src/routes';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -19,7 +19,7 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <StatusBar style='dark' translucent backgroundColor='transparent' />
-      {fontsLoaded ? <Home /> : <Loading />}
+      {fontsLoaded ? <Routes /> : <Loading />}
     </ThemeProvider>
   );
 }
