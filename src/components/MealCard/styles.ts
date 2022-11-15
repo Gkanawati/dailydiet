@@ -1,6 +1,14 @@
+import { FoodStatusProps } from '@components/StatsCard/styles';
+import { TouchableOpacity } from 'react-native';
 import styled, { css } from 'styled-components/native';
 
-export const Container = styled.View`
+type IconStatusButtonProps = {
+  color: FoodStatusProps;
+};
+
+export const Container = styled(TouchableOpacity).attrs(() => ({
+  activeOpacity: 0.6,
+}))`
   flex-direction: row;
   align-items: center;
   width: 100%;
@@ -33,5 +41,18 @@ export const TitleCard = styled.Text`
     color: ${theme.COLORS.GRAY_600};
     font-size: ${theme.FONT_SIZE.MD}px;
     font-family: ${theme.FONT_FAMILY.REGULAR};
+  `}
+  flex: 1;
+`;
+
+export const IconStatus = styled.View<IconStatusButtonProps>`
+  width: 8px;
+  height: 8px;
+  border-radius: 10px;
+  margin-right: 4px;
+  ${({ theme, color }) => css`
+    background-color: ${color === 'positive'
+      ? theme.COLORS.GREEN_MID
+      : theme.COLORS.RED_MID};
   `}
 `;

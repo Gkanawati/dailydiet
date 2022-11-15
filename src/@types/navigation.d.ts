@@ -4,7 +4,22 @@ export declare global {
       home: undefined;
       stats: undefined;
       new: undefined;
-      meal: undefined;
+      meal: {
+        id: string;
+        name: string;
+        description: string;
+        date: string;
+        hour: string;
+        status: string;
+      };
+      edit: {
+        id: string;
+        name: string;
+        description: string;
+        date: string;
+        hour: string;
+        status: string;
+      };
     }
   }
 }

@@ -35,6 +35,7 @@ const DATA = [
       {
         id: '3',
         name: 'Salada',
+        description: 'Saladinha com Frango',
         date: '12.08',
         hour: '22:00',
         status: 'positive',
@@ -42,6 +43,7 @@ const DATA = [
       {
         id: '4',
         name: 'Vitamina',
+        description: 'Vitamina de morango',
         date: '12.08',
         hour: '12:00',
         status: 'negative',
@@ -75,6 +77,7 @@ const DATA = [
       {
         id: '13',
         name: 'Salada',
+        description: 'Saladinha com Frango',
         date: '12.08',
         hour: '22:00',
         status: 'positive',
@@ -82,6 +85,7 @@ const DATA = [
       {
         id: '14',
         name: 'Vitamina',
+        description: 'Vitamina de morango',
         date: '12.08',
         hour: '12:00',
         status: 'negative',
@@ -95,23 +99,28 @@ export function Home() {
 
   return (
     <Container>
-      <Header />
-
-      <StatsCard
-        statsNumber={90.86}
-        status='positive'
-        onPress={() => navigate('stats')}
-      />
-
-      <TextAlt>Refeições</TextAlt>
-      <Button title='+ Nova refeição' onPress={() => navigate('new')} />
-
       <SectionList
+        ListHeaderComponent={
+          <>
+            <Header />
+
+            <StatsCard
+              statsNumber={90.86}
+              status='positive'
+              onPress={() => navigate('stats')}
+            />
+
+            <TextAlt>Refeições</TextAlt>
+            <Button title='+ Nova refeição' onPress={() => navigate('new')} />
+          </>
+        }
         sections={DATA}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
           <MealCard
+            id={item.id}
             name={item.name}
+            description={item.description}
             hour={item.hour}
             date={item.date}
             status={item.status === 'positive' ? 'positive' : 'negative'}

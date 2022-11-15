@@ -7,7 +7,11 @@ import {
   TitleHeader,
 } from './styles';
 
-export function NewMealHeader() {
+type HeaderProps = {
+  title?: string;
+};
+
+export function MealHeader({ title }: HeaderProps) {
   const navigation = useNavigation();
 
   return (
@@ -16,7 +20,7 @@ export function NewMealHeader() {
         <ButtonIcon onPress={() => navigation.goBack()}>
           <Icon />
         </ButtonIcon>
-        <TitleHeader>Nova refeição</TitleHeader>
+        {title && <TitleHeader>{title}</TitleHeader>}
       </ContentContainer>
     </Container>
   );
