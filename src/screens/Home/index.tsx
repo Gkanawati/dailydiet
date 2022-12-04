@@ -1,29 +1,32 @@
 import { useCallback, useState } from 'react';
-import { FlatList, SectionList } from 'react-native';
-import { Button } from '@components/Button';
-import { MealCard } from '@components/MealCard';
-import { Header } from '@components/Header ';
-import { StatsCard } from '@components/StatsCard';
-
+import { Alert, SectionList } from 'react-native';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
-import { getMeals } from '@storage/getMeals';
-import { MealStorageDTO } from '@storage/MealStorageDTO';
-
-import { Container, TextAlt } from './styles';
+import { Button } from '@components/Button';
+import { Header } from '@components/Header ';
+import { MealCard } from '@components/MealCard';
+import { StatsCard } from '@components/StatsCard';
+import { getMeals, getMealsInSection } from '@storage/meal';
+import { MealStorageDTO } from '@storage/meal/types/MealStorageDTO';
+import { Container, TextAlt, TitleSection } from './styles';
 
 export function Home() {
-  const [MealsData, setMealsData] = useState<MealStorageDTO[]>([]);
+  const [mealsData, setMealsData] = useState<MealStorageDTO[]>([]);
+  const [loadingMeals, setLoadingMeals] = useState(false);
   const { navigate } = useNavigation();
 
   async function getMealsStored() {
     try {
-      const data = await getMeals();
-      data.forEach((item) => console.log(item));
-      setMealsData(data);
-      return data;
+      setLoadingMeals(true);
+      const allMealsInSection = await getMealsInSection();
+      setMealsData(allMealsInSection);
     } catch (error) {
-      console.log('getMealsStored ~ error', error);
-      throw error;
+      console.log(error);
+      return Alert.alert(
+        'Erro',
+        'Ocorreu um erro ao carregar as refeições. Por favor, feche a aplicação e tente novamente.'
+      );
+    } finally {
+      setLoadingMeals(false);
     }
   }
 
@@ -35,7 +38,7 @@ export function Home() {
 
   return (
     <Container>
-      <FlatList
+      <SectionList
         ListHeaderComponent={
           <>
             <Header />
@@ -50,7 +53,7 @@ export function Home() {
             <Button title='+ Nova refeição' onPress={() => navigate('new')} />
           </>
         }
-        data={MealsData}
+        sections={mealsData}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
           <MealCard
@@ -60,22 +63,12 @@ export function Home() {
             hour={item.hour}
             date={item.date}
             status={item.status === 'positive' ? 'positive' : 'negative'}
-            onPress={() =>
-              navigate('meal', {
-                id: item.id,
-                name: item.name,
-                description: item.description,
-                date: item.date,
-                hour: item.hour,
-                status: item.status,
-              })
-            }
           />
         )}
-        // renderSectionHeader={({ section: { date } }) => (
-        //   <TitleSection>{date}</TitleSection>
-        // )}
-        // stickySectionHeadersEnabled={false}
+        renderSectionHeader={({ section: { title } }) => (
+          <TitleSection>{title}</TitleSection>
+        )}
+        stickySectionHeadersEnabled={false}
         contentContainerStyle={{ paddingBottom: 60 }}
         showsVerticalScrollIndicator={false}
       />

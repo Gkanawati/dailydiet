@@ -1,4 +1,9 @@
 export type MealStorageDTO = {
+  title: string;
+  data: MealDTO[];
+}
+
+export type MealDTO = {
   id: string;
   name: string;
   description: string;

@@ -14,8 +14,8 @@ import {
   StatusButtonPositive,
   TextButton,
 } from './styles';
-import { createMeal } from '@storage/createMeal';
-import { MealStorageDTO } from '@storage/MealStorageDTO';
+import { createMeal } from '@storage/meal/createMeal';
+import { MealStorageDTO } from '@storage/meal/types/MealStorageDTO';
 import { useNavigation } from '@react-navigation/native';
 
 export function NewMeal() {
